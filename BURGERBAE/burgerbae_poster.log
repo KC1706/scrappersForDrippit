@@ -1,0 +1,95 @@
+2025-05-03 10:35:29,430 - INFO - Starting BurgerBae poster with database: postgresql://external:lzRwJKeHvAvcIUWP6cnfXr5Yo97XX3GL@dpg-cu0fgilds78s73dd2u5g-a.singapore-postgres.render.com/v1_staging
+2025-05-03 10:35:29,430 - INFO - Delay between posts: 0.5 seconds
+2025-05-03 10:35:29,430 - INFO - Running single posting job
+2025-05-03 10:35:29,431 - INFO - Starting to process 1 products
+2025-05-03 10:35:29,431 - INFO - Processing product 1/1: Irish Track Pants(Mid Rise Regular Fit) For Men And Women
+2025-05-03 10:35:29,432 - ERROR - Error posting product Irish Track Pants(Mid Rise Regular Fit) For Men And Women: No module named 'app'
+2025-05-03 10:35:34,440 - ERROR - Error posting product Irish Track Pants(Mid Rise Regular Fit) For Men And Women: No module named 'app'
+2025-05-03 10:35:39,448 - ERROR - Error posting product Irish Track Pants(Mid Rise Regular Fit) For Men And Women: No module named 'app'
+2025-05-03 10:35:39,952 - INFO - Posting completed! Successfully posted 0 out of 1 products
+2025-05-03 10:36:31,129 - INFO - Starting BurgerBae poster with database: postgresql://external:lzRwJKeHvAvcIUWP6cnfXr5Yo97XX3GL@dpg-cu0fgilds78s73dd2u5g-a.singapore-postgres.render.com/v1_staging
+2025-05-03 10:36:31,129 - INFO - Delay between posts: 0.5 seconds
+2025-05-03 10:36:31,129 - INFO - Running single posting job
+2025-05-03 10:36:31,130 - INFO - Starting to process 1 products
+2025-05-03 10:36:31,130 - INFO - Processing product 1/1: Irish Track Pants(Mid Rise Regular Fit) For Men And Women
+2025-05-03 10:36:31,316 - ERROR - Error posting product Irish Track Pants(Mid Rise Regular Fit) For Men And Women: No module named 'twilio'
+2025-05-03 10:36:36,332 - ERROR - Error posting product Irish Track Pants(Mid Rise Regular Fit) For Men And Women: No module named 'twilio'
+2025-05-03 10:36:41,347 - ERROR - Error posting product Irish Track Pants(Mid Rise Regular Fit) For Men And Women: No module named 'twilio'
+2025-05-03 10:36:41,851 - INFO - Posting completed! Successfully posted 0 out of 1 products
+2025-05-03 10:41:32,966 - INFO - Starting BurgerBae poster with database: postgresql://external:lzRwJKeHvAvcIUWP6cnfXr5Yo97XX3GL@dpg-cu0fgilds78s73dd2u5g-a.singapore-postgres.render.com/v1_staging
+2025-05-03 10:41:32,966 - INFO - Delay between posts: 0.5 seconds
+2025-05-03 10:41:32,966 - INFO - Running single posting job
+2025-05-03 10:41:32,966 - INFO - Starting to process 1 products
+2025-05-03 10:41:32,966 - INFO - Processing product 1/1: Irish Track Pants(Mid Rise Regular Fit) For Men And Women
+2025-05-03 10:41:32,967 - ERROR - Error posting product Irish Track Pants(Mid Rise Regular Fit) For Men And Women: cannot import name 'db' from 'app' (/Users/apple/Desktop/Projects/reactiveNative/venv/lib/python3.13/site-packages/app/__init__.py)
+2025-05-03 10:41:37,974 - ERROR - Error posting product Irish Track Pants(Mid Rise Regular Fit) For Men And Women: cannot import name 'db' from 'app' (/Users/apple/Desktop/Projects/reactiveNative/venv/lib/python3.13/site-packages/app/__init__.py)
+2025-05-03 10:41:42,979 - ERROR - Error posting product Irish Track Pants(Mid Rise Regular Fit) For Men And Women: cannot import name 'db' from 'app' (/Users/apple/Desktop/Projects/reactiveNative/venv/lib/python3.13/site-packages/app/__init__.py)
+2025-05-03 10:41:43,484 - INFO - Posting completed! Successfully posted 0 out of 1 products
+2025-05-03 10:42:31,469 - INFO - Starting BurgerBae poster with database: postgresql://external:lzRwJKeHvAvcIUWP6cnfXr5Yo97XX3GL@dpg-cu0fgilds78s73dd2u5g-a.singapore-postgres.render.com/v1_staging
+2025-05-03 10:42:31,469 - INFO - Delay between posts: 0.5 seconds
+2025-05-03 10:42:31,469 - INFO - Running single posting job
+2025-05-03 10:42:31,469 - INFO - Starting to process 1 products
+2025-05-03 10:42:31,469 - INFO - Processing product 1/1: Irish Track Pants(Mid Rise Regular Fit) For Men And Women
+2025-05-03 10:42:31,469 - ERROR - Error posting product Irish Track Pants(Mid Rise Regular Fit) For Men And Women: No module named 'v1'
+2025-05-03 10:42:36,475 - ERROR - Error posting product Irish Track Pants(Mid Rise Regular Fit) For Men And Women: No module named 'v1'
+2025-05-03 10:42:38,180 - INFO - Poster stopped by user
+2025-05-03 10:50:16,606 - INFO - Starting BurgerBae poster with API endpoint: http://localhost:5000/products
+2025-05-03 10:50:16,608 - INFO - Delay between posts: 0.5 seconds
+2025-05-03 10:50:16,609 - INFO - Running single posting job
+2025-05-03 10:50:16,609 - INFO - Starting to process 1 products
+2025-05-03 10:50:16,609 - INFO - Processing product 1/1: Irish Track Pants(Mid Rise Regular Fit) For Men And Women
+2025-05-03 10:50:16,631 - WARNING - Attempt 1 failed for product Irish Track Pants(Mid Rise Regular Fit) For Men And Women. Status code: 403
+2025-05-03 10:50:16,631 - WARNING - Response: 
+2025-05-03 10:50:21,645 - WARNING - Attempt 2 failed for product Irish Track Pants(Mid Rise Regular Fit) For Men And Women. Status code: 403
+2025-05-03 10:50:21,645 - WARNING - Response: 
+2025-05-03 10:50:26,654 - WARNING - Attempt 3 failed for product Irish Track Pants(Mid Rise Regular Fit) For Men And Women. Status code: 403
+2025-05-03 10:50:26,655 - WARNING - Response: 
+2025-05-03 10:50:26,655 - ERROR - All 3 attempts failed for product: Irish Track Pants(Mid Rise Regular Fit) For Men And Women
+2025-05-03 10:50:27,160 - INFO - Posting completed! Successfully posted 0 out of 1 products
+2025-05-03 10:57:07,823 - INFO - Starting BurgerBae poster with API endpoint: http://localhost:5000/products
+2025-05-03 10:57:07,824 - INFO - Delay between posts: 0.5 seconds
+2025-05-03 10:57:07,824 - INFO - Running single posting job
+2025-05-03 10:57:07,824 - INFO - Starting to process 1 products
+2025-05-03 10:57:07,824 - INFO - Processing product 1/1: Irish Track Pants(Mid Rise Regular Fit) For Men And Women
+2025-05-03 10:57:07,850 - WARNING - Attempt 1 failed for product Irish Track Pants(Mid Rise Regular Fit) For Men And Women. Status code: 403
+2025-05-03 10:57:07,850 - WARNING - Response: 
+2025-05-03 10:57:11,803 - INFO - Poster stopped by user
+2025-05-03 10:58:26,813 - INFO - Starting BurgerBae poster with API endpoint: http://localhost:5000/products
+2025-05-03 10:58:26,814 - INFO - Delay between posts: 0.5 seconds
+2025-05-03 10:58:26,814 - INFO - Running single posting job
+2025-05-03 10:58:26,814 - INFO - Starting to process 1 products
+2025-05-03 10:58:26,814 - INFO - Processing product 1/1: Black sheer lace top with matching camisole
+2025-05-03 10:58:26,821 - WARNING - Attempt 1 failed for product Black sheer lace top with matching camisole. Status code: 403
+2025-05-03 10:58:26,821 - WARNING - Response: 
+2025-05-03 10:58:31,834 - WARNING - Attempt 2 failed for product Black sheer lace top with matching camisole. Status code: 403
+2025-05-03 10:58:31,835 - WARNING - Response: 
+2025-05-03 10:58:36,845 - WARNING - Attempt 3 failed for product Black sheer lace top with matching camisole. Status code: 403
+2025-05-03 10:58:36,845 - WARNING - Response: 
+2025-05-03 10:58:36,846 - ERROR - All 3 attempts failed for product: Black sheer lace top with matching camisole
+2025-05-03 10:58:37,350 - INFO - Posting completed! Successfully posted 0 out of 1 products
+2025-05-03 11:03:04,504 - INFO - Starting BurgerBae poster with API endpoint: http://localhost:5000/products
+2025-05-03 11:03:04,504 - INFO - Delay between posts: 0.5 seconds
+2025-05-03 11:03:04,504 - INFO - Running single posting job
+2025-05-03 11:03:04,505 - INFO - Starting to process 1 products
+2025-05-03 11:03:04,505 - INFO - Processing product 1/1: Irish Track Pants(Mid Rise Regular Fit) For Men And Women
+2025-05-03 11:03:04,527 - WARNING - Attempt 1 failed for product Irish Track Pants(Mid Rise Regular Fit) For Men And Women. Status code: 403
+2025-05-03 11:03:04,527 - WARNING - Response: 
+2025-05-03 11:03:09,532 - WARNING - Attempt 2 failed for product Irish Track Pants(Mid Rise Regular Fit) For Men And Women. Status code: 403
+2025-05-03 11:03:09,532 - WARNING - Response: 
+2025-05-03 11:03:14,542 - WARNING - Attempt 3 failed for product Irish Track Pants(Mid Rise Regular Fit) For Men And Women. Status code: 403
+2025-05-03 11:03:14,543 - WARNING - Response: 
+2025-05-03 11:03:14,543 - ERROR - All 3 attempts failed for product: Irish Track Pants(Mid Rise Regular Fit) For Men And Women
+2025-05-03 11:03:15,045 - INFO - Posting completed! Successfully posted 0 out of 1 products
+2025-05-05 10:41:13,600 - INFO - Starting BurgerBae poster with API endpoint: http://localhost:5000/products
+2025-05-05 10:41:13,602 - INFO - Delay between posts: 0.5 seconds
+2025-05-05 10:41:13,602 - INFO - Running single posting job
+2025-05-05 10:41:13,602 - INFO - Starting to process 1 products
+2025-05-05 10:41:13,602 - INFO - Processing product 1/1: Irish Track Pants(Mid Rise Regular Fit) For Men And Women
+2025-05-05 10:41:13,635 - WARNING - Attempt 1 failed for product Irish Track Pants(Mid Rise Regular Fit) For Men And Women. Status code: 403
+2025-05-05 10:41:13,635 - WARNING - Response: 
+2025-05-05 10:41:18,648 - WARNING - Attempt 2 failed for product Irish Track Pants(Mid Rise Regular Fit) For Men And Women. Status code: 403
+2025-05-05 10:41:18,648 - WARNING - Response: 
+2025-05-05 10:41:23,685 - WARNING - Attempt 3 failed for product Irish Track Pants(Mid Rise Regular Fit) For Men And Women. Status code: 403
+2025-05-05 10:41:23,687 - WARNING - Response: 
+2025-05-05 10:41:23,687 - ERROR - All 3 attempts failed for product: Irish Track Pants(Mid Rise Regular Fit) For Men And Women
+2025-05-05 10:41:24,192 - INFO - Posting completed! Successfully posted 0 out of 1 products

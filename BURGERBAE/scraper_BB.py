@@ -28,9 +28,9 @@ class BurgerBaeScraper:
         """Extract relevant tags from product details"""
         # Define available tags
         available_tags = [
-            "Hoodies", "Co-ords", "T-Shirts", "Baby Tees", "Cute Tops", 
+            "Hoodie", "Co-ords", "T-Shirts", "Baby Tees", "Cute Tops", 
             "Tanks", "Tops", "Shades", "Bottoms", "Dresses", 
-            "Accessories", "Sweatshirts"
+            "Accessories", "Sweatshirts", "Camisole", "Crop Tops", "dress", "Hat", "Skirt", "Sweater","Y2K top"
         ]
         
         # Convert to lowercase for case-insensitive matching
@@ -103,7 +103,7 @@ class BurgerBaeScraper:
             print("Starting product data extraction...")
             
             # Hardcoded vendor ID for BurgerBae
-            VENDOR_ID = "b8e7d2a1-4f3c-4b2d-9e1f-6a5b3c2d1e0f"
+            VENDOR_ID = "b255da59-029c-4fe4-b502-015487736e87"
             
             # Extract product name and URL
             name_element = product_element.select_one('.product-card-title')
@@ -245,7 +245,8 @@ class BurgerBaeScraper:
                 "colors": colors,
                 "tags": tags,
                 "on_sale": bool(original_price and current_price and original_price > current_price),
-                "size_chart": size_chart
+                "size_chart": size_chart,
+                "productUrl": product_url
             }
 
             # Create price object
@@ -259,13 +260,11 @@ class BurgerBaeScraper:
             }
             
             product = {
-                "id": str(uuid.uuid4()),
                 "label": name,
                 "description": description,
                 "images": images,
                 "price": price,
                 "meta": meta,
-                "url": product_url,
                 "vendor_id": VENDOR_ID
             }
             print("Successfully created product object")
@@ -353,7 +352,7 @@ class BurgerBaeScraper:
 def main():
     # Example usage
     urls = [
-        "https://www.burgerbaeclothing.com/collections/all",
+        "https://www.burgerbaeclothing.com/collections/for-womens",
         # Add more collection URLs as needed
     ]
     

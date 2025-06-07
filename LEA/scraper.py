@@ -6,6 +6,8 @@ from typing import List, Dict, Any
 import time
 import random
 from urllib.parse import urljoin
+import logging
+import re
 
 class LeaClothingScraper:
     def __init__(self, base_url: str = "https://www.leaclothingco.com"):
@@ -13,16 +15,42 @@ class LeaClothingScraper:
         self.headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
         }
+        # Configure logging
+        logging.basicConfig(level=logging.INFO)
+        self.logger = logging.getLogger(__name__)
 
-    def get_page_content(self, url: str) -> BeautifulSoup:
-        """Fetch and parse a webpage"""
-        try:
-            response = requests.get(url, headers=self.headers)
-            response.raise_for_status()
-            return BeautifulSoup(response.text, 'html.parser')
-        except Exception as e:
-            print(f"Error fetching {url}: {str(e)}")
-            return None
+    def get_page_content(self, url: str, max_retries: int = 3) -> BeautifulSoup:
+        """Fetch and parse a webpage with retry logic and rate limiting"""
+        for attempt in range(max_retries):
+            try:
+                # Add delay between requests (increasing with each retry)
+                if attempt > 0:
+                    delay = min(30, 5 * (2 ** attempt))  # Exponential backoff, max 30 seconds
+                    self.logger.info(f"Waiting {delay} seconds before retry...")
+                    time.sleep(delay)
+                
+                response = requests.get(url, headers=self.headers)
+                response.raise_for_status()
+                
+                # Add a random delay between 3-7 seconds after successful requests
+                time.sleep(random.uniform(3, 7))
+                
+                return BeautifulSoup(response.text, 'html.parser')
+                
+            except requests.exceptions.HTTPError as e:
+                if e.response.status_code == 429:
+                    self.logger.warning(f"Rate limited on attempt {attempt + 1}/{max_retries}. URL: {url}")
+                    if attempt == max_retries - 1:
+                        self.logger.error(f"Max retries reached for {url}")
+                        return None
+                else:
+                    self.logger.error(f"HTTP error fetching {url}: {str(e)}")
+                    return None
+            except Exception as e:
+                self.logger.error(f"Error fetching {url}: {str(e)}")
+                return None
+        
+        return None
 
     def extract_product_data(self, product_element) -> Dict[str, Any]:
         """Extract product data from a product element"""
@@ -31,7 +59,7 @@ class LeaClothingScraper:
             name_element = product_element.select_one('.ProductItem__Title a')
             name = name_element.text.strip() if name_element else None
             product_url = urljoin(self.base_url, name_element['href']) if name_element else None
-            VENDOR_ID = "3c4f5d92-7a3e-49a2-a4b6-8ef9a6d9c1e3"
+            VENDOR_ID = "7c9e130b-8920-4914-853e-64ee867bb3b4"
 
 
             # Visit the individual product page
@@ -42,18 +70,60 @@ class LeaClothingScraper:
             # Extract prices
             current_price = None
             original_price = None
-            price_list = product_soup.select_one('.ProductMeta__PriceList')
-            if price_list:
-                # Extract current price
-                current_price_element = price_list.select_one('.ProductMeta__Price.Price--highlight')
-                if current_price_element:
-                    current_price = float(current_price_element.text.strip().replace('Rs.', '').replace(',', '').strip())
-                
-                # Extract original price
-                original_price_element = price_list.select_one('.ProductMeta__Price.Price--compareAt')
-                if original_price_element:
-                    original_price = float(original_price_element.text.strip().replace('Rs.', '').replace(',', '').strip())
             
+            # Try multiple price selectors
+            price_selectors = [
+                '.ProductMeta__PriceList .ProductMeta__Price.Price--highlight',
+                '.ProductMeta__PriceList .ProductMeta__Price',
+                '.ProductMeta__Price',
+                '.price',
+                '[data-product-price]'
+            ]
+            
+            for selector in price_selectors:
+                price_element = product_soup.select_one(selector)
+                if price_element:
+                    try:
+                        price_text = price_element.text.strip()
+                        # Remove currency symbols and clean the price
+                        price_text = price_text.replace('Rs.', '').replace('₹', '').replace(',', '').strip()
+                        # Extract the first number found
+                        price_match = re.search(r'\d+(?:\.\d+)?', price_text)
+                        if price_match:
+                            current_price = float(price_match.group())
+                            break
+                    except Exception as e:
+                        self.logger.warning(f"Error parsing price from {selector}: {str(e)}")
+            
+            # Try to find original price if available
+            original_price_selectors = [
+                '.ProductMeta__PriceList .ProductMeta__Price.Price--compareAt',
+                '.ProductMeta__Price.Price--compareAt',
+                '.compare-at-price',
+                '[data-compare-price]'
+            ]
+            
+            for selector in original_price_selectors:
+                original_price_element = product_soup.select_one(selector)
+                if original_price_element:
+                    try:
+                        price_text = original_price_element.text.strip()
+                        # Remove currency symbols and clean the price
+                        price_text = price_text.replace('Rs.', '').replace('₹', '').replace(',', '').strip()
+                        # Extract the first number found
+                        price_match = re.search(r'\d+(?:\.\d+)?', price_text)
+                        if price_match:
+                            original_price = float(price_match.group())
+                            break
+                    except Exception as e:
+                        self.logger.warning(f"Error parsing original price from {selector}: {str(e)}")
+            
+            # Log if prices couldn't be extracted
+            if current_price is None:
+                self.logger.warning(f"Could not extract current price for product: {product_url}")
+            if original_price is None:
+                self.logger.info(f"No original price found for product: {product_url}")
+
             # Extract image URLs from product page
             images = []
             # First try to get images from the product slides
@@ -268,16 +338,16 @@ class LeaClothingScraper:
 
             # Create meta data
             meta = {
-                "CATEGORY": category,
-                "RATING": rating,
-                "REVIEW_COUNT": review_count,
-                "AVAILABLE_SIZES": list(size_chart["inches"].keys()),
-                "COLORS": list(colors),
-                "PRODUCT_DETAILS": product_details,
-                "VENDOR_DETAILS": vendor_details,
-                "SIZE_CHART": size_chart,
-                "ORIGINAL_PRICE": original_price,
-                "TAGS": [category] if category else []
+                "category": category,
+                "rating": rating,
+                "review_count": review_count,
+                "available_sizes": list(size_chart["inches"].keys()),
+                "colors": list(colors),
+                "product_details": product_details,
+                "vendor_details": vendor_details,
+                "size_chart": size_chart,
+                "tags": [category] if category else [],
+                "productUrl": product_url,
             }
 
             # Create price object
@@ -291,13 +361,12 @@ class LeaClothingScraper:
             }
             
             product = {
-                "id": str(uuid.uuid4()),
                 "label": name,
                 "description": description,
                 "images": images,
                 "price": price,
                 "meta": meta,
-                "url": product_url,
+                # "url": product_url,
                 "vendor_id": VENDOR_ID
             }
             return product
@@ -310,7 +379,7 @@ class LeaClothingScraper:
         all_products = []
         
         for url in urls:
-            print(f"Scraping {url}...")
+            self.logger.info(f"Scraping {url}...")
             soup = self.get_page_content(url)
             
             if not soup:
@@ -323,8 +392,8 @@ class LeaClothingScraper:
                 if product_data:
                     all_products.append(product_data)
                     
-            # Add delay to be respectful to the website
-            time.sleep(random.uniform(1, 3))
+            # Add longer delay between collection pages
+            time.sleep(random.uniform(5, 10))
             
         return all_products
 
