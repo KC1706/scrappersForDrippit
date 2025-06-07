@@ -45,7 +45,7 @@ def post_product(product: Dict[str, Any], api_url: str) -> bool:
 
 def main():
     # Configuration
-    JSON_FILE_PATH = "./LEA/lea_products.json"
+    JSON_FILE_PATH = "./LEA/filtered_products.json"
     API_URL = "http://127.0.0.1:5000/products"
     
     try:
